@@ -1,0 +1,21 @@
+:root {
+  --task-done-bg: #008001;
+  --task-in-progress-bg: #027bff;
+  --task-pending-bg: #808080;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --main-background-color: #f0f0f0;
+    --main-text-color: #000000;
+    --card-background-color: #ffffff;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-background-color: #242424;
+    --main-text-color: #ffffff;
+    --card-background-color: #333333;
+  }
+}
