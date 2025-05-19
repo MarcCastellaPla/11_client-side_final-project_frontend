@@ -1,5 +1,5 @@
 import styles from "./Header.module.css";
 
 export const Header = () => {
-  return <h1 className={styles["header__title"]}>Books</h1>;
+  return <h1 className={styles["header__title"]}>My Book Collection</h1>;
 };
