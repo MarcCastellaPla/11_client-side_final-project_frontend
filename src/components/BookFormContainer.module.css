@@ -1,0 +1,12 @@
+.submit__button {
+  background-color: #41a545;
+  color: white;
+  border-radius: 4px;
+  padding: 0.6rem .75rem;
+  border: none;
+  font-size: 14px;
+  margin-top: 0rem;
+  margin-bottom: 2rem;
+  display: block;
+  text-align: center;
+}

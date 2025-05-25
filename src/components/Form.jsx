@@ -1,17 +1,13 @@
 import styles from "./BookForm.module.css";
 
-export const Form = ({ addBook, toggleFormVisibility }) => {
-  // BUG: Change name
+export const BookForm = ({ addBook }) => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <>
-      <button
-        className={styles["submit__button"]}
-        onClick={() => toggleFormVisibility((prevValue) => !prevValue)}
-      >
-        Cancel
-      </button>
+    <div className={styles["form__wrapper"]}>
+      <h2 className={styles["form__title"]}>Add a New Book</h2>
       <form
-        className={`${styles["form__wrapper"]}`}
         id="bookForm"
         onSubmit={addBook}
       >
@@ -37,7 +33,7 @@ export const Form = ({ addBook, toggleFormVisibility }) => {
           <label htmlFor="year" className={styles["form__label"]}>
             Publication Year
           </label>
-          <input name="year" rows="3" required />
+          <input name="year" rows="3" required value={currentYear}/>
           <label htmlFor="status" className={styles["form__label"]}>
             Status
           </label>
@@ -51,6 +47,7 @@ export const Form = ({ addBook, toggleFormVisibility }) => {
           </button>
         </div>
       </form>
+      </div>
     </>
   );
 };

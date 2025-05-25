@@ -1,18 +1,16 @@
 .form__wrapper {
   margin: 2rem auto;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 16px;
   background-color: #fff;
   box-shadow: -2px 4px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
   gap: 1.5rem;
 }
 
-.form__wrapper h2 {
+.form__title {
   font-size: 18px;
   font-weight: normal;
   color: black;
-  padding-bottom: 0.75rem;
 }
 
 .form-group {
@@ -46,7 +44,7 @@
 .form__wrapper textarea:focus,
 .form__wrapper select:focus {
   border-color: #61e466;
-  outline: 3px ridge #71ca73;
+  outline: 1px ridge #71ca73;
 }
 
 .form__button {
@@ -82,11 +80,3 @@
   text-align: center;
 }
 
-/* IMPORTANT: Keep seeing video */
-/* button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
