@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
+
 export function useBooks() {
   const [books, setBooks] = useState([]);
+  const [bookToEdit, setBookToEdit] = useState(null);
+
 
   const fetchBooks = async () => {
   try {
@@ -75,8 +78,24 @@ export function useBooks() {
     return newBook;
   };
 
-  const editBook = async (bookId, updatedBook) => {
+  const editBook = async (event) => {
+    
+    const formData = new FormData(event.target);
+    const title = formData.get("title");
+    const author = formData.get("author");
+    const year = formData.get("year");
+    const status = formData.get("status");
+    const bookId = bookToEdit.id;
+    const updatedBook = {
+      id: bookId,
+      title,
+      author,
+      year,
+      status,
+    };
     const apiLink = `${import.meta.env.VITE_API_URL}/books/${bookId}`;
+
+     ("Editing book:", updatedBook);
 
     const response = await fetch(apiLink, {
       method: "PUT",
@@ -85,15 +104,14 @@ export function useBooks() {
       },
       body: JSON.stringify(updatedBook),
     });
-
     const editedBook = await response.json();
-    console.log("Book edited:", editedBook);
 
-    // Update the books state with the edited book
-    setBooks((prevBooks) =>
-      prevBooks.map((book) => (book.id === bookId ? editedBook : book))
-    );
-
+    if (response.ok) {
+      alert("Book edited successfully!");
+      await fetchBooks(); 
+    } else {
+      console.error("Failed to edit book");
+    }
     return editedBook;    
   };
 
@@ -102,5 +120,5 @@ export function useBooks() {
   }, []);
 
 
-  return { books, updateBooks, addBook, editBook, deleteBook, fetchBooks }; // Add addBook to the returned object
+  return { books, updateBooks, addBook, editBook, deleteBook, fetchBooks, bookToEdit, setBookToEdit };
 }

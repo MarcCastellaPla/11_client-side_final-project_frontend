@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
-
 export function useButtons() {
   const [isFormVisible, setFormVisible] = useState(false);
 
@@ -13,5 +11,5 @@ export function useButtons() {
     setFormVisible(true);
   }
 
-  return { isFormVisible, showEditForm, toggleFormVisibility }; // Add addBook to the returned object
+  return { isFormVisible, showEditForm, toggleFormVisibility }; 
 }

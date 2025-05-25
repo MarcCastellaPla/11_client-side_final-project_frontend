@@ -2,7 +2,7 @@ import styles from "./BookCard.module.css";
 
 export const BookCard = ({
   book: { id, title, author, year, status },
-  showEditForm, deleteBook
+  showEditForm, deleteBook, setBookToEdit
 }) => {
   const statusModifier = {
     pending: styles["book-card__status--pending"],
@@ -14,6 +14,11 @@ export const BookCard = ({
     if (window.confirm("Are you sure you want to delete this book?")) {
       deleteBook({ id });
     }
+  };
+
+  const handleEdit = () => {
+    setBookToEdit({ id, title, author, year, status });
+    showEditForm();
   };
 
 
@@ -37,7 +42,7 @@ export const BookCard = ({
       </div>
 
       <div className={styles["book-card__actions"]}>
-        <button className={styles["book-card__edit"]} onClick={() => showEditForm()}>Edit</button>
+        <button className={styles["book-card__edit"]} onClick={handleEdit}>Edit</button>
         <button className={styles["book-card__delete"]} onClick={handleDelete}>
             Delete
         </button>
