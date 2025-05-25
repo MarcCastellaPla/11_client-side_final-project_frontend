@@ -5,9 +5,38 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 export function useBooks() {
   const [books, setBooks] = useState([]);
 
+  const fetchBooks = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/books`);
+    const data = await response.json();
+    setBooks(data);
+  } catch (error) {
+    console.error("Failed to fetch books:", error);
+  }
+};
+
+
   const updateBooks = (books) => {
     setBooks(books);
   };
+
+  const deleteBook = async ({ id }) => {
+    const apiLink = `${BASE_URL}/books/${id}`;
+
+    const response = await fetch(apiLink, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      await fetchBooks(); 
+    } else {
+      console.error("Failed to delete book");
+    }
+  };
+
 
   const addBook = async (event) => {
     event.preventDefault();
@@ -36,15 +65,11 @@ export function useBooks() {
     });
 
     const newBook = await response.json();
-    console.log("New book added:", newBook);
 
-    // Update the books state with the new book
     setBooks([...books, newBook]);
 
-    // Reset form
     event.target.reset();
 
-    // Use UpdateBooks to update the books state
     updateBooks([...books, newBook]);
 
     return newBook;
@@ -69,15 +94,13 @@ export function useBooks() {
       prevBooks.map((book) => (book.id === bookId ? editedBook : book))
     );
 
-    return editedBook;
+    return editedBook;    
   };
 
   useEffect(() => {
-    fetch(`${BASE_URL}/books`)
-      .then((response) => response.json())
-      .then((data) => setBooks(data))
-      .catch((error) => console.error("Failed to fetch books:", error));
+  fetchBooks();
   }, []);
 
-  return { books, updateBooks, addBook, editBook }; // Add addBook to the returned object
+
+  return { books, updateBooks, addBook, editBook, deleteBook, fetchBooks }; // Add addBook to the returned object
 }

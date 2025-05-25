@@ -1,34 +1,47 @@
 import styles from "./BookCard.module.css";
 
 export const BookCard = ({
-  book: { title, author, year, status },
-  showEditForm,
+  book: { id, title, author, year, status },
+  showEditForm, deleteBook
 }) => {
   const statusModifier = {
-    pending: styles["bookCard__status--pending"],
-    "in-progress": styles["bookCard__status--in-progress"],
-    read: styles["bookCard__status--completed"],
+    pending: styles["book-card__status--pending"],
+    "in-progress": styles["book-card__status--in-progress"],
+    read: styles["book-card__status--read"],
   };
 
-  const titleModifier = {
-    pending: styles["bookCard__title--pending"],
-    "in-progress": styles["bookCard__title--in-progress"],
-    read: styles["bookCard__title--completed"],
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this book?")) {
+      deleteBook({ id });
+    }
   };
+
+
 
   return (
     <>
-      <h4 className={`${styles["bookCard__title"]} ${titleModifier[title]}`}>
-        {title}
-      </h4>
-      <p className={styles["bookCard__description"]}>{author}</p>
-      <p className={styles["bookCard__description"]}>{year}</p>
-      <span
-        className={`${styles["bookCard__status"]} ${statusModifier[status]}`}
-      >
-        {status.toUpperCase()}
-      </span>
-      <button onClick={showEditForm()}>Edit</button>
+      <div className={styles["book-card__title-row"]}>
+        <h4 className={styles["book-card__title"]}>
+          {title}
+        </h4>
+        <p className={styles["book-card__year"]}>{year}</p>
+      </div>
+      <p className={styles["book-card__author"]}>{author}</p>
+
+      <div className={styles["book-card__status-wrapper"]}>
+        <span
+          className={`${styles["book-card__status"]} ${statusModifier[status]}`}
+        >
+          {status}
+        </span>
+      </div>
+
+      <div className={styles["book-card__actions"]}>
+        <button className={styles["book-card__edit"]} onClick={() => showEditForm()}>Edit</button>
+        <button className={styles["book-card__delete"]} onClick={handleDelete}>
+            Delete
+        </button>
+      </div>
     </>
   );
 };

@@ -1,12 +1,12 @@
 import { BookCard } from "./BookCard";
 import styles from "./BooksList.module.css";
 
-export const BooksList = ({ books, showEditForm }) => {
+export const BooksList = ({ books, showEditForm, deleteBook }) => {
   return (
     <ul className={styles["taskList__items"]}>
       {books.map((book) => (
         <li key={book.id}>
-          <BookCard book={book} showEditForm={showEditForm} />
+          <BookCard book={book} showEditForm={showEditForm} deleteBook={deleteBook} />
         </li>
       ))}
     </ul>

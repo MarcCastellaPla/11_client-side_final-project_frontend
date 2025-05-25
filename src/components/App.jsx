@@ -8,7 +8,7 @@ import { useBooks } from "../hooks/useBooks";
 import { useButtons } from "../hooks/useButtons";
 
 function App() {
-  const { books, addBook } = useBooks();
+  const { books, addBook, deleteBook } = useBooks();
   const { isFormVisible, toggleFormVisibility, showEditForm } = useButtons();
 
   return (
@@ -20,7 +20,7 @@ function App() {
         isFormVisible={isFormVisible}
       />
       <ListContainer>
-        <BooksList books={books} showEditForm={showEditForm} />
+        <BooksList books={books} showEditForm={showEditForm} deleteBook={deleteBook} />
       </ListContainer>
     </>
   );

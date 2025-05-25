@@ -35,8 +35,9 @@
   width: fit-content;
 }
 
-.book-card__status--completed {
-  background-color: var(--task-done-bg);
+.book-card__status--read {
+  background-color: #D1EBD1;
+  color: #6EA16F;
 }
 
 .book-card__status--in-progress {

@@ -6,7 +6,7 @@ export const Form = ({ addBook, toggleFormVisibility }) => {
     <>
       <button
         className={styles["submit__button"]}
-        onClick={() => toggleFormVisibility((prevValue) => !prevValue)} // BUG: The button clicks twice
+        onClick={() => toggleFormVisibility((prevValue) => !prevValue)}
       >
         Cancel
       </button>
@@ -44,7 +44,7 @@ export const Form = ({ addBook, toggleFormVisibility }) => {
           <select name="status" defaultValue="pending">
             <option value="pending">Pending</option>
             <option value="in-progress">In Progress</option>
-            <option value="completed">Completed</option>
+            <option value="read">Read</option>
           </select>
           <button type="submit" className={styles["submit__button"]}>
             Add Book
