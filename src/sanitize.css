@@ -31,3 +31,8 @@ textarea,
 button {
   outline: none;
 }
+
+button {
+  all: unset;
+  cursor: pointer;
+}

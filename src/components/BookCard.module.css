@@ -1,53 +1,99 @@
-.bookCard__title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: var(--main-text-color);
-  min-height: 50px;
-}
-
-.bookCard__title--completed {
-  text-decoration: line-through;
-}
-
-.bookCard__title--in-progress {
-  font-weight: bold;
-}
-
-.bookCard__title--pending {
-  font-weight: normal;
-}
-
-.bookCard__description {
+.book-card__author {
+  color: #666;
   flex-grow: 1;
   font-size: 14px;
   margin-bottom: 10px;
-  color: var(--main-text-color);
   text-align: left;
 }
 
-.bookCard__status {
+.book-card__row {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.book-card__status-wrapper {
+  width: calc(100% + 30px);   /* 15px left + right */
+  margin-left: -15px;
+  margin-right: -15px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 0.5rem 0;
+  display: flex;
+}
+
+.book-card__status {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  width: 100%;
-  height: 35px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
+  padding: 0.25rem;
+  font-size: 12px;
   color: var(--main-text-color);
-  margin-top: auto;
+  margin: 0.5rem 15px;
+  border-radius: 4px;
+  width: fit-content;
 }
 
-.bookCard__status--completed {
+.book-card__status--completed {
   background-color: var(--task-done-bg);
 }
 
-.bookCard__status--in-progress {
-  background-color: var(--task-in-progress-bg);
+.book-card__status--in-progress {
+  background-color: #DEEFFB;
+  color: #5B8CC7;
 }
 
-.bookCard__status--pending {
-  background-color: var(--task-pending-bg);
+.book-card__status--pending {
+  background-color: #FFF6DA;
+  color: #E38D4D;
 }
+
+.book-card__title {
+  color: var(--main-text-color);
+  flex: 1;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.book-card__title-row {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.book-card__year {
+  background-color: #ECECEC;
+  border-radius: 4px;
+  color: #666;
+  font-size: 14px;
+  padding: 0.2rem 0.5rem;
+}
+
+.book-card__edit {
+  width: fit-content;
+  font-size: 14px;
+  padding: .25rem 1rem;
+  background-color: #ECECEC;
+  border-radius: 4px;
+
+}
+
+.book-card__actions {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.book-card__delete {
+  background-color: #FEE7EA;
+  color: #AF494A;
+  font-size: 14px;
+  padding: .25rem 1rem;
+  border-radius: 4px;
+
+}
+
+
+
