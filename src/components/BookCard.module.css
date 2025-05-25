@@ -1,4 +1,4 @@
-.itemCard__title {
+.bookCard__title {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -6,19 +6,19 @@
   min-height: 50px;
 }
 
-.itemCard__title--completed {
+.bookCard__title--completed {
   text-decoration: line-through;
 }
 
-.itemCard__title--in-progress {
+.bookCard__title--in-progress {
   font-weight: bold;
 }
 
-.itemCard__title--pending {
+.bookCard__title--pending {
   font-weight: normal;
 }
 
-.itemCard__description {
+.bookCard__description {
   flex-grow: 1;
   font-size: 14px;
   margin-bottom: 10px;
@@ -26,7 +26,7 @@
   text-align: left;
 }
 
-.itemCard__status {
+.bookCard__status {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -40,14 +40,14 @@
   margin-top: auto;
 }
 
-.itemCard__status--completed {
+.bookCard__status--completed {
   background-color: var(--task-done-bg);
 }
 
-.itemCard__status--in-progress {
+.bookCard__status--in-progress {
   background-color: var(--task-in-progress-bg);
 }
 
-.itemCard__status--pending {
+.bookCard__status--pending {
   background-color: var(--task-pending-bg);
 }

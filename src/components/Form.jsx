@@ -1,11 +1,12 @@
 import styles from "./BookForm.module.css";
 
-export const Form = ({ addBook, setFormVisible }) => {
+export const Form = ({ addBook, toggleFormVisibility }) => {
+  // BUG: Change name
   return (
     <>
       <button
         className={styles["submit__button"]}
-        onClick={() => setFormVisible((prevValue) => !prevValue)} // BUG: The button clicks twice
+        onClick={() => toggleFormVisibility((prevValue) => !prevValue)} // BUG: The button clicks twice
       >
         Cancel
       </button>

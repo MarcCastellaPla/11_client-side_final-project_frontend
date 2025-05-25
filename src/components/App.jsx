@@ -2,19 +2,25 @@ import "./App.css";
 
 import { Header } from "./Header.jsx";
 import { ListContainer } from "./ListContainer.jsx";
-import { ItemsList } from "./ItemsList.jsx";
+import { BooksList } from "./BooksList.jsx";
 import { BookForm } from "./BookForm.jsx";
 import { useBooks } from "../hooks/useBooks";
+import { useButtons } from "../hooks/useButtons";
 
 function App() {
   const { books, addBook } = useBooks();
+  const { isFormVisible, toggleFormVisibility, showEditForm } = useButtons();
 
   return (
     <>
       <Header />
-      <BookForm addBook={addBook} />
+      <BookForm
+        addBook={addBook}
+        toggleFormVisibility={toggleFormVisibility}
+        isFormVisible={isFormVisible}
+      />
       <ListContainer>
-        <ItemsList books={books} />
+        <BooksList books={books} showEditForm={showEditForm} />
       </ListContainer>
     </>
   );

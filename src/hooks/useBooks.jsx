@@ -50,6 +50,28 @@ export function useBooks() {
     return newBook;
   };
 
+  const editBook = async (bookId, updatedBook) => {
+    const apiLink = `${import.meta.env.VITE_API_URL}/books/${bookId}`;
+
+    const response = await fetch(apiLink, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedBook),
+    });
+
+    const editedBook = await response.json();
+    console.log("Book edited:", editedBook);
+
+    // Update the books state with the edited book
+    setBooks((prevBooks) =>
+      prevBooks.map((book) => (book.id === bookId ? editedBook : book))
+    );
+
+    return editedBook;
+  };
+
   useEffect(() => {
     fetch(`${BASE_URL}/books`)
       .then((response) => response.json())
@@ -57,5 +79,5 @@ export function useBooks() {
       .catch((error) => console.error("Failed to fetch books:", error));
   }, []);
 
-  return { books, updateBooks, addBook }; // Add addBook to the returned object
+  return { books, updateBooks, addBook, editBook }; // Add addBook to the returned object
 }
