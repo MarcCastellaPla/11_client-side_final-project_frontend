@@ -2,22 +2,19 @@ import { useEffect, useState } from "react";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-
 export function useBooks() {
   const [books, setBooks] = useState([]);
   const [bookToEdit, setBookToEdit] = useState(null);
 
-
   const fetchBooks = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/books`);
-    const data = await response.json();
-    setBooks(data);
-  } catch (error) {
-    console.error("Failed to fetch books:", error);
-  }
-};
-
+    try {
+      const response = await fetch(`${BASE_URL}/books`);
+      const data = await response.json();
+      setBooks(data);
+    } catch (error) {
+      console.error("Failed to fetch books:", error);
+    }
+  };
 
   const updateBooks = (books) => {
     setBooks(books);
@@ -34,12 +31,11 @@ export function useBooks() {
     });
 
     if (response.ok) {
-      await fetchBooks(); 
+      await fetchBooks();
     } else {
       console.error("Failed to delete book");
     }
   };
-
 
   const addBook = async (event) => {
     event.preventDefault();
@@ -79,7 +75,6 @@ export function useBooks() {
   };
 
   const editBook = async (event) => {
-    
     const formData = new FormData(event.target);
     const title = formData.get("title");
     const author = formData.get("author");
@@ -95,7 +90,7 @@ export function useBooks() {
     };
     const apiLink = `${import.meta.env.VITE_API_URL}/books/${bookId}`;
 
-     ("Editing book:", updatedBook);
+    "Editing book:", updatedBook;
 
     const response = await fetch(apiLink, {
       method: "PUT",
@@ -108,17 +103,25 @@ export function useBooks() {
 
     if (response.ok) {
       alert("Book edited successfully!");
-      await fetchBooks(); 
+      fetchBooks();
     } else {
       console.error("Failed to edit book");
     }
-    return editedBook;    
+    return editedBook;
   };
 
   useEffect(() => {
-  fetchBooks();
+    fetchBooks();
   }, []);
 
-
-  return { books, updateBooks, addBook, editBook, deleteBook, fetchBooks, bookToEdit, setBookToEdit };
+  return {
+    books,
+    updateBooks,
+    addBook,
+    editBook,
+    deleteBook,
+    fetchBooks,
+    bookToEdit,
+    setBookToEdit,
+  };
 }
