@@ -5,110 +5,87 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 export function useBooks() {
   const [books, setBooks] = useState([]);
   const [bookToEdit, setBookToEdit] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchBooks = async () => {
+  async function fetchBooks() {
+    setIsLoading(true);
     try {
       const response = await fetch(`${BASE_URL}/books`);
       const data = await response.json();
       setBooks(data);
     } catch (error) {
       console.error("Failed to fetch books:", error);
+    } finally {
+      setIsLoading(false);
     }
-  };
+  }
 
-  const updateBooks = (books) => {
-    setBooks(books);
-  };
+  function updateBooks(newBooks) {
+    setBooks(newBooks);
+  }
 
-  const deleteBook = async ({ id }) => {
-    const apiLink = `${BASE_URL}/books/${id}`;
-
-    const response = await fetch(apiLink, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (response.ok) {
-      await fetchBooks();
-    } else {
-      console.error("Failed to delete book");
+  async function deleteBook({ id }) {
+    try {
+      const response = await fetch(`${BASE_URL}/books/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (response.ok) {
+        await fetchBooks();
+      } else {
+        console.error("Failed to delete book");
+      }
+    } catch (error) {
+      console.error("Failed to delete book:", error);
     }
-  };
+  }
 
-  const addBook = async (event) => {
+  async function addBook(event) {
     event.preventDefault();
-
     const formData = new FormData(event.target);
-    const apiLink = `${import.meta.env.VITE_API_URL}/books`;
-
-    const title = formData.get("title");
-    const author = formData.get("author");
-    const year = formData.get("year");
-    const status = formData.get("status");
-
     const book = {
-      title,
-      author,
-      year,
-      status,
+      title:  formData.get("title"),
+      author: formData.get("author"),
+      year:   formData.get("year"),
+      status: formData.get("status"),
     };
-
-    const response = await fetch(apiLink, {
+    const response = await fetch(`${BASE_URL}/books`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(book),
     });
-
     const newBook = await response.json();
-
-    setBooks([...books, newBook]);
-
+    const updatedList = [...books, newBook];
+    setBooks(updatedList);
     event.target.reset();
-
-    updateBooks([...books, newBook]);
-
+    updateBooks(updatedList);
     return newBook;
-  };
+  }
 
-  const editBook = async (event) => {
+  async function editBook(event) {
+    event.preventDefault();
     const formData = new FormData(event.target);
-    const title = formData.get("title");
-    const author = formData.get("author");
-    const year = formData.get("year");
-    const status = formData.get("status");
-    const bookId = bookToEdit.id;
     const updatedBook = {
-      id: bookId,
-      title,
-      author,
-      year,
-      status,
+      id:     bookToEdit.id,
+      title:  formData.get("title"),
+      author: formData.get("author"),
+      year:   formData.get("year"),
+      status: formData.get("status"),
     };
-    const apiLink = `${import.meta.env.VITE_API_URL}/books/${bookId}`;
-
-    "Editing book:", updatedBook;
-
-    const response = await fetch(apiLink, {
+    const response = await fetch(`${BASE_URL}/books/${updatedBook.id}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedBook),
     });
-    const editedBook = await response.json();
-
+    const result = await response.json();
     if (response.ok) {
       alert("Book edited successfully!");
       fetchBooks();
     } else {
       console.error("Failed to edit book");
     }
-    return editedBook;
-  };
+    return result;
+  }
 
   useEffect(() => {
     fetchBooks();
@@ -116,11 +93,12 @@ export function useBooks() {
 
   return {
     books,
+    isLoading,
+    fetchBooks,
     updateBooks,
     addBook,
     editBook,
     deleteBook,
-    fetchBooks,
     bookToEdit,
     setBookToEdit,
   };

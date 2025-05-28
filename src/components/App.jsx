@@ -7,7 +7,15 @@ import { useBooks } from "../hooks/useBooks";
 import { useButtons } from "../hooks/useButtons";
 
 function App() {
-  const { books, addBook, deleteBook, setBookToEdit, bookToEdit, editBook } = useBooks();
+  const {
+    books,
+    isLoading,
+    addBook,
+    deleteBook,
+    setBookToEdit,
+    bookToEdit,
+    editBook,
+  } = useBooks();
   const { isFormVisible, toggleFormVisibility, showEditForm } = useButtons();
 
   return (
@@ -21,7 +29,13 @@ function App() {
         editBook={editBook}
         setBookToEdit={setBookToEdit}
       />
-        <BooksList books={books} showEditForm={showEditForm} deleteBook={deleteBook} setBookToEdit={setBookToEdit} />
+      <BooksList
+        books={books}
+        isLoading={isLoading}
+        showEditForm={showEditForm}
+        deleteBook={deleteBook}
+        setBookToEdit={setBookToEdit}
+      />
     </>
   );
 }
