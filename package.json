@@ -7,6 +7,7 @@
     "dev": "vite",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md}\"",
     "test": "vitest",
+    "test:run": "vitest run",
     "build": "vite build",
     "preview": "vite preview",
     "prepare": "husky install",
