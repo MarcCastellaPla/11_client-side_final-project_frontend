@@ -53,4 +53,14 @@ describe("Given BookForm", () => {
     // Assert
     expect(option.tagName).toBe("OPTION");
   });
+
+  it("should have a heading with 'Add a New Book'", () => {
+  // Act
+  const { getByText } = render(<BookForm />);
+  const heading = getByText("Add a New Book");
+
+  // Assert
+  expect(heading.tagName).toBe("H2");
+});
+
 });

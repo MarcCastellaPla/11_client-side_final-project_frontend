@@ -27,15 +27,23 @@ describe("Given BookFormContainer", () => {
     // Assert
     expect(bookFormButton.tagName).toBe("BUTTON");
   });
-
-  it("should print a <form> when isFormVisible is true", () => {
-    const { getByRole } = render(<BookFormContainer isFormVisible={true} />);
-
-    const firstInput = getByRole("input")[0];
-
-    const form = firstInput.closest("form");
+    // Act
+    it("should not render any <form> element when the form is hidden", () => {
+    const { queryByRole } = render(<BookFormContainer />);
+    const form = queryByRole("form");
 
     // Assert
-    expect(form.tagName).toBe("FORM");
+    expect(form).toBeNull();
   });
+
+  it("should render the BookForm heading when the form is visible", () => {
+    // Act
+    const { getByText } = render(<BookFormContainer isFormVisible={true} />);
+    const heading = getByText("Add a New Book");
+
+    // Assert
+    expect(heading.tagName).toBe("H2");
+  });
+
+
 });

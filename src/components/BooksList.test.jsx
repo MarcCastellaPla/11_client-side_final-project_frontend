@@ -22,7 +22,6 @@ describe("Given BooksList", () => {
   it("should print an unordered list", () => {
     // Act
     const { getByRole } = render(<BooksList books={mockBooks} />);
-
     const unorderedList = getByRole("list");
 
     // Assert
@@ -32,7 +31,6 @@ describe("Given BooksList", () => {
   it("should print a p with the correct book author", () => {
     // Act
     const { getByText } = render(<BooksList books={mockBooks} />);
-
     const paragraph = getByText("Book author");
 
     // Assert
@@ -42,7 +40,6 @@ describe("Given BooksList", () => {
   it("should print a parahraph with the correct year", () => {
     // Act
     const { getByText } = render(<BooksList books={mockBooks} />);
-
     const paragraph = getByText("1");
 
     // Assert
@@ -52,7 +49,6 @@ describe("Given BooksList", () => {
   it("should print a span with the correct status", () => {
     // Act
     const { getByText } = render(<BooksList books={mockBooks} />);
-
     const span = getByText("pending");
 
     // Assert

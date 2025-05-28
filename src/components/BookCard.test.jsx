@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest";
+import { describe, it, expect } from "vitest";
 import { BookCard } from "./BookCard";
 import { render } from "@testing-library/react";
 import { afterEach } from "vitest";
@@ -16,7 +16,7 @@ describe("Given BookCard", () => {
   afterEach(() => {
     cleanup();
   });
-  test("When BookCard is rendered Then an h4 with the title should be printed", () => {
+  it("should print an h4 with the correct title", () => {
     // Act
     const { getByText } = render(<BookCard book={mockBook} />);
 
@@ -27,7 +27,7 @@ describe("Given BookCard", () => {
     expect(title.tagName).toBe("H4");
   });
 
-  test("When BookCard is rendered Then a p with the author should be printed", () => {
+  it("should print a paragraph with the correct author", () => {
     // Act
     const { getByText } = render(<BookCard book={mockBook} />);
 
@@ -37,7 +37,7 @@ describe("Given BookCard", () => {
     expect(paragraph.tagName).toBe("P");
   });
 
-  test("When BookCard is rendered Then a p with the year should be printed", () => {
+  it("should print a paragraph with the correct year", () => {
     // Act
     const { getByText } = render(<BookCard book={mockBook} />);
 
@@ -47,7 +47,7 @@ describe("Given BookCard", () => {
     expect(paragraph.tagName).toBe("P");
   });
 
-  test("When BookCard is rendered Then a span with the status should be printed", () => {
+  it("should print a span with the correct status", () => {
     // Act
     const { getByText } = render(<BookCard book={mockBook} />);
 
