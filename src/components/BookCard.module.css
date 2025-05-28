@@ -14,7 +14,7 @@
 }
 
 .book-card__status-wrapper {
-  width: calc(100% + 30px);   /* 15px left + right */
+  width: calc(100% + 30px); 
   margin-left: -15px;
   margin-right: -15px;
   border-top: 1px solid #ccc;

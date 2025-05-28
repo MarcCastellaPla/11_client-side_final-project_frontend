@@ -16,40 +16,44 @@ describe("Given BookCard", () => {
   afterEach(() => {
     cleanup();
   });
+
   it("should print an h4 with the correct title", () => {
     // Act
     const { getByText } = render(<BookCard book={mockBook} />);
     const title = getByText("Book test");
-
     // Assert
-
     expect(title.tagName).toBe("H4");
   });
 
   it("should print a paragraph with the correct author", () => {
     // Act
     const { getByText } = render(<BookCard book={mockBook} />);
-    const paragraph = getByText("Book author");
-
+    const author = getByText("Book author");
     // Assert
-    expect(paragraph.tagName).toBe("P");
+    expect(author.tagName).toBe("P");
   });
 
   it("should print a paragraph with the correct year", () => {
     // Act
     const { getByText } = render(<BookCard book={mockBook} />);
-    const paragraph = getByText("1");
-
+    const year = getByText("1");
     // Assert
-    expect(paragraph.tagName).toBe("P");
+    expect(year.tagName).toBe("P");
   });
 
   it("should print a span with the correct status", () => {
     // Act
     const { getByText } = render(<BookCard book={mockBook} />);
-    const span = getByText("pending");
-
+    const status = getByText("pending");
     // Assert
-    expect(span.tagName).toBe("SPAN");
+    expect(status.tagName).toBe("SPAN");
+  });
+
+  it("should have a 'Delete' button", () => {
+    // Act
+    const { getByText } = render(<BookCard book={mockBook} />);
+    const deleteButton = getByText("Delete");
+    // Assert
+    expect(deleteButton.tagName).toBe("BUTTON");
   });
 });

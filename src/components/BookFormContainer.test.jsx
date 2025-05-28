@@ -1,3 +1,4 @@
+// BookFormContainer.test.tsx
 import { describe, it, expect } from "vitest";
 import { BookFormContainer } from "./BookFormContainer";
 import { render } from "@testing-library/react";
@@ -8,6 +9,7 @@ describe("Given BookFormContainer", () => {
   afterEach(() => {
     cleanup();
   });
+
   it("should print a button with 'Add New Book' as text", () => {
     // Act
     const { getByText } = render(<BookFormContainer />);
@@ -25,8 +27,9 @@ describe("Given BookFormContainer", () => {
     // Assert
     expect(bookFormButton.tagName).toBe("BUTTON");
   });
+
+  it("should not render any <form> element when the form is hidden", () => {
     // Act
-    it("should not render any <form> element when the form is hidden", () => {
     const { queryByRole } = render(<BookFormContainer />);
     const form = queryByRole("form");
 
@@ -42,6 +45,4 @@ describe("Given BookFormContainer", () => {
     // Assert
     expect(heading.tagName).toBe("H2");
   });
-
-
 });
