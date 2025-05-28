@@ -11,7 +11,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "prepare": "husky install",
-    "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\""
+    "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
+    "test:run": "vitest run"
+
   },
   "dependencies": {
     "react": "^19.1.0",
