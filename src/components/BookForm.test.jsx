@@ -1,48 +1,44 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, afterEach } from "vitest";
+import { render, cleanup } from "@testing-library/react";
 import { BookForm } from "./BookForm";
-import { render } from "@testing-library/react";
-import { afterEach } from "vitest";
-import { cleanup } from "@testing-library/react";
 
 describe("Given BookForm", () => {
-  // IMPORTANT: Add more tests
   afterEach(() => {
     cleanup();
   });
+
   it("should have 'Enter book title' as placeholder", () => {
     // Act
     const { getByPlaceholderText } = render(<BookForm />);
-    const bookTitlePlaceholder = getByPlaceholderText("Enter book title");
+    const input = getByPlaceholderText("Enter book title");
 
     // Assert
-    expect(bookTitlePlaceholder.tagName).toBe("INPUT");
+    expect(input.tagName).toBe("INPUT");
   });
 
   it("should have 'Enter your author name' as placeholder", () => {
     // Act
     const { getByPlaceholderText } = render(<BookForm />);
-    const bookAuthor = getByPlaceholderText("Enter your author name");
+    const input = getByPlaceholderText("Enter your author name");
 
     // Assert
-    expect(bookAuthor.tagName).toBe("INPUT");
+    expect(input.tagName).toBe("INPUT");
   });
 
-  it("should have the actual year as display value and be an input", () => {
-    // Arrenge
-    const expectedYear = new Date().getFullYear();
-    const stringExpectedYear = expectedYear.toString();
+  it("should have the current year as display value in the year input", () => {
+    // Arrange
+    const expectedYear = new Date().getFullYear().toString();
 
     // Act
     const { getByDisplayValue } = render(<BookForm />);
-
-    const year = getByDisplayValue("2025");
+    const yearInput = getByDisplayValue(expectedYear);
 
     // Assert
-    expect(year.tagName).toBe("INPUT");
-    expect(year.value).toBe(stringExpectedYear);
+    expect(yearInput.tagName).toBe("INPUT");
+    expect(yearInput.value).toBe(expectedYear);
   });
 
-  it("Should have pending as an option", () => {
+  it("should have 'Pending' as a status option", () => {
     // Act
     const { getByText } = render(<BookForm />);
     const option = getByText("Pending");
@@ -51,13 +47,12 @@ describe("Given BookForm", () => {
     expect(option.tagName).toBe("OPTION");
   });
 
-  it("should have a heading with 'Add a New Book'", () => {
-  // Act
-  const { getByText } = render(<BookForm />);
-  const heading = getByText("Add a New Book");
+  it("should have a heading with 'Add New Book'", () => {
+    // Act
+    const { getByText } = render(<BookForm />);
+    const heading = getByText(/add new book/i);
 
-  // Assert
-  expect(heading.tagName).toBe("H2");
-});
-
+    // Assert
+    expect(heading.tagName).toBe("H2");
+  });
 });

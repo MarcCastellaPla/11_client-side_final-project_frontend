@@ -1,8 +1,6 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, afterEach } from "vitest";
+import { render, cleanup } from "@testing-library/react";
 import { BooksList } from "./BooksList";
-import { render } from "@testing-library/react";
-import { afterEach } from "vitest";
-import { cleanup } from "@testing-library/react";
 
 describe("Given BooksList", () => {
   const mockBooks = [
@@ -14,44 +12,44 @@ describe("Given BooksList", () => {
       status: "pending",
     },
   ];
-  console.log(mockBooks);
 
   afterEach(() => {
     cleanup();
   });
+
   it("should print an unordered list", () => {
     // Act
     const { getByRole } = render(<BooksList books={mockBooks} />);
-    const unorderedList = getByRole("list");
+    const list = getByRole("list");
 
     // Assert
-    expect(unorderedList.tagName).toBe("UL");
+    expect(list.tagName).toBe("UL");
   });
 
-  it("should print a p with the correct book author", () => {
+  it("should print a paragraph with the correct author", () => {
     // Act
     const { getByText } = render(<BooksList books={mockBooks} />);
-    const paragraph = getByText("Book author");
+    const authorParagraph = getByText("Book author");
 
     // Assert
-    expect(paragraph.tagName).toBe("P");
+    expect(authorParagraph.tagName).toBe("P");
   });
 
-  it("should print a parahraph with the correct year", () => {
+  it("should print a paragraph with the correct year", () => {
     // Act
     const { getByText } = render(<BooksList books={mockBooks} />);
-    const paragraph = getByText("1");
+    const yearParagraph = getByText("1");
 
     // Assert
-    expect(paragraph.tagName).toBe("P");
+    expect(yearParagraph.tagName).toBe("P");
   });
 
   it("should print a span with the correct status", () => {
     // Act
     const { getByText } = render(<BooksList books={mockBooks} />);
-    const span = getByText("pending");
+    const statusSpan = getByText("pending");
 
     // Assert
-    expect(span.tagName).toBe("SPAN");
+    expect(statusSpan.tagName).toBe("SPAN");
   });
 });

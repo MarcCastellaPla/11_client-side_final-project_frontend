@@ -1,47 +1,37 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, afterEach } from "vitest";
+import { render, cleanup } from "@testing-library/react";
 import { Header } from "./Header";
-import { render } from "@testing-library/react";
-import { afterEach } from "vitest";
-import { cleanup } from "@testing-library/react";
 
 describe("Given Header", () => {
   afterEach(() => {
     cleanup();
   });
 
-  it("Should print an H1 as a header", () => {
+  it("should render exactly one heading element", () => {
     // Act
-    const { getByRole } = render(<Header />);
-    const headerTitle = getByRole("heading");
-
-    // Assert
-    expect(headerTitle.tagName).toBe("H1");
-  });
-
-  it("Should print 'My Book Collection' as header text", () => {
-    // Act
-    const { getByText } = render(<Header />);
-    const header = getByText("My Book Collection");
-
-    // Assert
-    expect(header.textContent).toBe("My Book Collection");
-  });
-
-  it("Should have only one heading in the document", () => {
-    // Act
-    const { queryAllByRole } = render(<Header />);
-    const headings = queryAllByRole("heading");
+    const { getAllByRole } = render(<Header />);
+    const headings = getAllByRole("heading");
 
     // Assert
     expect(headings.length).toBe(1);
   });
 
-  it("Should include the CSS class 'header__title'", () => {
+  it("should render an H1 with the correct text", () => {
     // Act
     const { getByRole } = render(<Header />);
-    const headerTitle = getByRole("heading");
-    
+    const h1 = getByRole("heading");
+
     // Assert
-    expect(headerTitle.className).toContain("header__title");
+    expect(h1.tagName).toBe("H1");
+    expect(h1.textContent).toBe("My Book Collection");
+  });
+
+  it("should include the 'header__title' CSS class", () => {
+    // Act
+    const { getByRole } = render(<Header />);
+    const h1 = getByRole("heading");
+
+    // Assert
+    expect(h1.className).toContain("header__title");
   });
 });

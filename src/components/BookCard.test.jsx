@@ -1,8 +1,6 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, afterEach } from "vitest";
+import { render, cleanup } from "@testing-library/react";
 import { BookCard } from "./BookCard";
-import { render } from "@testing-library/react";
-import { afterEach } from "vitest";
-import { cleanup } from "@testing-library/react";
 
 describe("Given BookCard", () => {
   const mockBook = {
@@ -16,13 +14,13 @@ describe("Given BookCard", () => {
   afterEach(() => {
     cleanup();
   });
+
   it("should print an h4 with the correct title", () => {
     // Act
     const { getByText } = render(<BookCard book={mockBook} />);
     const title = getByText("Book test");
 
     // Assert
-
     expect(title.tagName).toBe("H4");
   });
 
