@@ -12,7 +12,6 @@ describe("Given BookForm", () => {
   it("should have 'Enter book title' as placeholder", () => {
     // Act
     const { getByPlaceholderText } = render(<BookForm />);
-
     const bookTitlePlaceholder = getByPlaceholderText("Enter book title");
 
     // Assert
@@ -22,7 +21,6 @@ describe("Given BookForm", () => {
   it("should have 'Enter your author name' as placeholder", () => {
     // Act
     const { getByPlaceholderText } = render(<BookForm />);
-
     const bookAuthor = getByPlaceholderText("Enter your author name");
 
     // Assert
@@ -47,7 +45,6 @@ describe("Given BookForm", () => {
   it("Should have pending as an option", () => {
     // Act
     const { getByText } = render(<BookForm />);
-
     const option = getByText("Pending");
 
     // Assert

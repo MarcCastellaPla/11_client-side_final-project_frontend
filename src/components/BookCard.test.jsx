@@ -19,7 +19,6 @@ describe("Given BookCard", () => {
   it("should print an h4 with the correct title", () => {
     // Act
     const { getByText } = render(<BookCard book={mockBook} />);
-
     const title = getByText("Book test");
 
     // Assert
@@ -30,7 +29,6 @@ describe("Given BookCard", () => {
   it("should print a paragraph with the correct author", () => {
     // Act
     const { getByText } = render(<BookCard book={mockBook} />);
-
     const paragraph = getByText("Book author");
 
     // Assert
@@ -40,7 +38,6 @@ describe("Given BookCard", () => {
   it("should print a paragraph with the correct year", () => {
     // Act
     const { getByText } = render(<BookCard book={mockBook} />);
-
     const paragraph = getByText("1");
 
     // Assert
@@ -50,7 +47,6 @@ describe("Given BookCard", () => {
   it("should print a span with the correct status", () => {
     // Act
     const { getByText } = render(<BookCard book={mockBook} />);
-
     const span = getByText("pending");
 
     // Assert

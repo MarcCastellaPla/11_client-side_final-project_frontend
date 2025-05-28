@@ -11,7 +11,6 @@ describe("Given BookFormContainer", () => {
   it("should print a button with 'Add New Book' as text", () => {
     // Act
     const { getByText } = render(<BookFormContainer />);
-
     const bookFormButton = getByText("Add New Book");
 
     // Assert
@@ -21,7 +20,6 @@ describe("Given BookFormContainer", () => {
   it("should print a button with 'Cancel' as text when the bookForm is visible", () => {
     // Act
     const { getByText } = render(<BookFormContainer isFormVisible={true} />);
-
     const bookFormButton = getByText("Cancel");
 
     // Assert
