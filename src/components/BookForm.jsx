@@ -15,6 +15,8 @@ export const BookForm = ({
   let year = new Date().getFullYear();
   let status = "pending";
   let buttonText = "Add Book";
+  let titleText = "Add New Book";
+
 
   if (bookToEdit) {
     title = bookToEdit.title;
@@ -22,6 +24,7 @@ export const BookForm = ({
     year = bookToEdit.year;
     status = bookToEdit.status;
     buttonText = "Edit Book";
+    titleText = "Edit Book";
   }
 
   if (isSaving) {
@@ -49,7 +52,7 @@ export const BookForm = ({
   return (
     <>
       <div className={styles["form__wrapper"]}>
-        <h2 className={styles["form__title"]}>Add a New Book</h2>
+        <h2 className={styles["form__title"]}>{titleText}</h2>
         <form id="bookForm" onSubmit={handleSubmit}>
           <div className={styles["form-group"]}>
             <label htmlFor="title" className={styles["form__label"]}>
