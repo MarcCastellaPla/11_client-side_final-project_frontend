@@ -52,4 +52,13 @@ describe("Given BooksList", () => {
     // Assert
     expect(statusSpan.tagName).toBe("SPAN");
   });
+
+  it("should print the loading message when isLoading is true", () => {
+    // Act
+    const { getByText } = render(<BooksList books={mockBooks} isLoading={true} />);
+    const loadingHeader = getByText("Loading Books...");
+
+    // Assert
+    expect(loadingHeader.tagName).toBe("H3");
+  });
 });

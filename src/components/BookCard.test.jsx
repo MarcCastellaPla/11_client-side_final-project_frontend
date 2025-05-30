@@ -1,5 +1,5 @@
-import { describe, it, expect, afterEach } from "vitest";
-import { render, cleanup } from "@testing-library/react";
+import { describe, it, expect, afterEach, vi } from "vitest";
+import { render, cleanup, fireEvent } from "@testing-library/react";
 import { BookCard } from "./BookCard";
 
 describe("Given BookCard", () => {
@@ -49,5 +49,63 @@ describe("Given BookCard", () => {
 
     // Assert
     expect(span.tagName).toBe("SPAN");
+  });
+
+  it("should call setBookToEdit and showEditForm when Edit is clicked", () => {
+    // Arrange
+    const setBookToEdit = vi.fn();
+    const showEditForm = vi.fn();
+
+    // Act
+    const { getByText } = render(
+      <BookCard
+        book={mockBook}
+        setBookToEdit={setBookToEdit}
+        showEditForm={showEditForm}
+      />
+    );
+    const button = getByText("Edit");
+    fireEvent.click(button);
+
+    // Assert
+    expect(setBookToEdit).toHaveBeenCalledWith(mockBook);
+    expect(showEditForm).toHaveBeenCalled();
+  });
+
+  it("should call deleteBook with correct id when Delete is clicked and confirmed", () => {
+    // Arrange
+    const deleteBook = vi.fn();
+    vi.spyOn(window, "confirm").mockReturnValue(true);
+
+    // Act
+    const { getByText } = render(
+      <BookCard book={mockBook} deleteBook={deleteBook} />
+    );
+    const button = getByText("Delete");
+    fireEvent.click(button);
+
+    // Assert
+    expect(deleteBook).toHaveBeenCalledWith({ id: 1 });
+
+    window.confirm.mockRestore();
+  });
+
+  it("should not call deleteBook if confirm is cancelled", () => {
+    // Arrange
+    const deleteBook = vi.fn();
+    vi.spyOn(window, "confirm").mockReturnValue(false);
+
+    // Act
+    const { getByText } = render(
+      <BookCard book={mockBook} deleteBook={deleteBook} />
+    );
+    const button = getByText("Delete");
+    fireEvent.click(button);
+
+    // Assert
+    expect(deleteBook).not.toHaveBeenCalled();
+
+    // Cleanup the mock
+    window.confirm.mockRestore();
   });
 });

@@ -1,5 +1,5 @@
-import { describe, it, expect, afterEach } from "vitest";
-import { render, cleanup } from "@testing-library/react";
+import { describe, it, expect, afterEach, vi } from "vitest";
+import { render, cleanup, fireEvent } from "@testing-library/react";
 import { BookFormContainer } from "./BookFormContainer";
 
 describe("Given BookFormContainer", () => {
@@ -41,5 +41,34 @@ describe("Given BookFormContainer", () => {
 
     // Assert
     expect(heading.tagName).toBe("H2");
+  });
+
+  it("should call toggleFormVisibility and setBookToEdit when clicking cancel button", () => {
+    // Arrange
+    const toggleFormVisibility = vi.fn();
+    const setBookToEdit = vi.fn();
+    const bookToEdit = {
+      id: 1,
+      title: "test",
+      author: "author",
+      year: "2024",
+      status: "pending",
+    };
+
+    // Act
+    const { getByText } = render(
+      <BookFormContainer
+        isFormVisible={true}
+        toggleFormVisibility={toggleFormVisibility}
+        setBookToEdit={setBookToEdit}
+        bookToEdit={bookToEdit}
+      />
+    );
+    const button = getByText("Cancel");
+    fireEvent.click(button);
+
+    // Assert
+    expect(setBookToEdit).toHaveBeenCalledWith(null);
+    expect(toggleFormVisibility).toHaveBeenCalled();
   });
 });
