@@ -1,5 +1,3 @@
-import "./App.css";
-
 import { Header } from "./Header.jsx";
 import { BooksList } from "./BooksList.jsx";
 import { BookFormContainer } from "./BookFormContainer.jsx";
