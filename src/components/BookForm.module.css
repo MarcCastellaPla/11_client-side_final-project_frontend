@@ -38,6 +38,7 @@
   border-radius: 2px;
   background-color: var(--white);
   width: 100%;
+  color: var(--black);
 }
 
 .form__wrapper input:focus,
@@ -45,6 +46,13 @@
 .form__wrapper select:focus {
   border-color: var(--focus-border);
   outline: 1px ridge var(--focus-outline);
+  color: var(--black);
+}
+
+.form__wrapper input::placeholder,
+.form__wrapper textarea::placeholder,
+.form__wrapper select::placeholder {
+  color: var(--form-placeholder);
 }
 
 .form__button {
@@ -89,5 +97,5 @@
   .form__row {
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-  }
+}
 }

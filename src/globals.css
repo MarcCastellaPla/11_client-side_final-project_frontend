@@ -15,7 +15,7 @@
   --status-pending-bg: #FFF6DA;
   --status-pending-text: #E38D4D;
 
-  --neutral-bg: #ECECEC;
+  --neutral-bg: #f0f0f0;
   --delete-bg: #FEE7EA;
   --delete-text: #AF494A;
 
@@ -28,6 +28,10 @@
 
   --loading-bg: #f5f7f9;
   --loading-text: #333;
+
+  --primary-text: #333;
+  --form-placeholder: #9CA3AF;
+  
 
   --card-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }

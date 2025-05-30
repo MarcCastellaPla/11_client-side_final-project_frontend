@@ -3,4 +3,5 @@
   line-height: 1em;
   padding: 1.5rem 0rem;
   font-weight: normal;
+  color: var(--primary-text);
 }
