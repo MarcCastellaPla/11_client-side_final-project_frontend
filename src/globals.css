@@ -1,0 +1,37 @@
+:root {
+  --task-done-bg: #008001;
+  --task-in-progress-bg: #027bff;
+  --task-pending-bg: #808080;
+
+  --text-muted: #666;
+  --black: black;
+  --white: white;
+  --border-default: #ccc;
+
+  --status-read-bg: #D1EBD1;
+  --status-read-text: #6EA16F;
+  --status-inprogress-bg: #DEEFFB;
+  --status-inprogress-text: #5B8CC7;
+  --status-pending-bg: #FFF6DA;
+  --status-pending-text: #E38D4D;
+
+  --neutral-bg: #f0f0f0;
+  --delete-bg: #FEE7EA;
+  --delete-text: #AF494A;
+
+  --focus-border: #61e466;
+  --focus-outline: #71ca73;
+
+  --primary-button-bg: #007bff;
+  --primary-button-hover: #0056b3;
+  --submit-button-bg: #41a545;
+
+  --loading-bg: #f5f7f9;
+  --loading-text: #333;
+
+  --primary-text: #333;
+  --form-placeholder: #9CA3AF;
+  
+
+  --card-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
