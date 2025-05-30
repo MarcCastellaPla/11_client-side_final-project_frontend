@@ -11,10 +11,16 @@ export function useBooks() {
     setIsLoading(true);
     try {
       const response = await fetch(`${BASE_URL}/books`);
+      if (!response.ok) {
+        console.error("Failed to fetch books:", response.statusText);
+        alert("Could not load books. Please try again later.");
+        return;
+      }
       const data = await response.json();
       setBooks(data);
     } catch (error) {
       console.error("Failed to fetch books:", error);
+      alert("Could not load books. Please check your connection.");
     } finally {
       setIsLoading(false);
     }
@@ -33,10 +39,12 @@ export function useBooks() {
       if (response.ok) {
         await fetchBooks();
       } else {
-        console.error("Failed to delete book");
+        console.error("Failed to delete book:", response.statusText);
+        alert("Could not delete the book. Please try again.");
       }
     } catch (error) {
       console.error("Failed to delete book:", error);
+      alert("Could not delete the book. Please check your connection.");
     }
   }
 
@@ -49,17 +57,28 @@ export function useBooks() {
       year:   formData.get("year"),
       status: formData.get("status"),
     };
-    const response = await fetch(`${BASE_URL}/books`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(book),
-    });
-    const newBook = await response.json();
-    const updatedList = [...books, newBook];
-    setBooks(updatedList);
-    event.target.reset();
-    updateBooks(updatedList);
-    return newBook;
+
+    try {
+      const response = await fetch(`${BASE_URL}/books`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(book),
+      });
+      if (!response.ok) {
+        console.error("Failed to add book:", response.statusText);
+        alert("Could not add the book. Please try again.");
+        return;
+      }
+      const newBook = await response.json();
+      const updatedList = [...books, newBook];
+      setBooks(updatedList);
+      event.target.reset();
+      updateBooks(updatedList);
+      return newBook;
+    } catch (error) {
+      console.error("Failed to add book:", error);
+      alert("Could not add the book. Please check your connection.");
+    }
   }
 
   async function editBook(event) {
@@ -72,19 +91,26 @@ export function useBooks() {
       year:   formData.get("year"),
       status: formData.get("status"),
     };
-    const response = await fetch(`${BASE_URL}/books/${updatedBook.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedBook),
-    });
-    const result = await response.json();
-    if (response.ok) {
-      alert("Book edited successfully!");
-      fetchBooks();
-    } else {
-      console.error("Failed to edit book");
+
+    try {
+      const response = await fetch(`${BASE_URL}/books/${updatedBook.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedBook),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        alert("Book edited successfully!");
+        fetchBooks();
+      } else {
+        console.error("Failed to edit book:", response.statusText);
+        alert("Could not save your changes. Please try again.");
+      }
+      return result;
+    } catch (error) {
+      console.error("Failed to edit book:", error);
+      alert("Could not save your changes. Please check your connection.");
     }
-    return result;
   }
 
   useEffect(() => {
